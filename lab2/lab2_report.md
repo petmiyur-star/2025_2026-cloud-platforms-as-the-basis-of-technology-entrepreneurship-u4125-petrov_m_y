@@ -1,19 +1,31 @@
 University: ITMO University (https://itmo.ru/ru/)
+
 Faculty: FICT (https://fict.itmo.ru)
+
 Course: Cloud platforms as the basis of technology entrepreneurship
+
 Year: 2025/2026
+
 Group: U4125
+
 Author: Petrov Mikhail Yurievich
+
 Lab: Lab2
+
 Date of create: 05.05.2026
+
 Date of finished: 05.05.2026
+
 # Лабораторная работа №2: Исследование Cloud Run
 
 ## Цель работы
+
 Ознакомиться с работой сервиса Google Cloud Run, научиться развёртывать контейнерные приложения, анализировать логи и метрики, управлять трафиком между ревизиями.
+
 ## Ход выполнения
 
 ### 1. Создание сервиса из собственного образа
+
 Был собран Docker-образ на основе Python + Flask. 
 Код приложения `app.py`:
 
@@ -36,27 +48,39 @@ gcloud builds submit --tag gcr.io/cloud-platforms-as-the-basis/petrov-custom-hel
 gcloud run deploy petrov-custom \
   --image gcr.io/cloud-platforms-as-the-basis/petrov-custom-hello \
   --platform managed --region europe-west1 --allow-unauthenticated --port 8080
+
 ![Страница сервиса](service_url_lab2.png)
+
 ![Приветствие в браузере](hello_world.png)
+
 ### 2. Анализ логов (Cloud Logging)
+
 Через **Logs Explorer** выполнен запрос по ресурсу `cloud_run_revision` и сервису `petrov-custom`.
 Логи содержат записи о запуске контейнера, обработке HTTP-запросов (метод GET, статус 200).
+
 ![Логи](logs_lab2.png)
+
 ### 3. Анализ метрик (Cloud Monitoring)
+
 Через **Metrics Explorer** выбран ресурс `Cloud Run Revision` и метрика `Request count`. Построен график запросов к сервису.
+
 ![Метрики](metrics_lab2.png)
+
 ### 4. Изменение порта контейнера и создание новой ревизии
 На странице сервиса нажата кнопка **Edit & Deploy new revision**. Порт изменён с `8080` на `8090`.
 Новая ревизия `petrov-custom-00002` успешно запустилась (образ читает переменную PORT).
-### 6. Очистка ресурсов
+
+### 5. Очистка ресурсов
 Сервис удалён командой:
 gcloud run services delete petrov-custom --region europe-west1 --quiet
+
 ## Выводы
 - Cloud Run – полностью управляемая serverless платформа для запуска контейнеров.
 - Приложение должно слушать порт, переданный в переменной окружения PORT.
 - Логи и метрики встроены в экосистему Google Cloud.
 - Cloud Run поддерживает несколько ревизий и гибкое управление трафиком.
 - Масштабирование от нуля позволяет экономить ресурсы.
+
 ## Полезные ссылки
 - [Cloud Run quickstart](https://cloud.google.com/run/docs/quickstarts)
 - [Logging and Monitoring for Cloud Run](https://cloud.google.com/run/docs/logging)
