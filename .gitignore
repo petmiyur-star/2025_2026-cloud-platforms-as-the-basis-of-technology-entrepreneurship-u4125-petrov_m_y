@@ -1,1 +1,21 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
 
+# Editor Files
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Logs and Databases
+*.log
+*.sqlite
+
+# Archive and Temporary Files
+*.zip
+*.tar.gz
+*.rar
+*.tmp
