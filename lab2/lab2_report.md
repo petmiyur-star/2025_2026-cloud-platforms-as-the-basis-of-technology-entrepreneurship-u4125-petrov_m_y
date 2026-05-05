@@ -14,7 +14,9 @@ Date of finished: 05.05.2026
 ## Ход выполнения
 
 ### 1. Создание сервиса из собственного образа
-Был собран Docker-образ на основе Python + Flask. Код приложения `app.py`:
+Был собран Docker-образ на основе Python + Flask. 
+Код приложения `app.py`:
+
 from flask import Flask
 app = Flask(__name__)
 
@@ -28,6 +30,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
 Образ собран и загружен в Artifact Registry:
 gcloud builds submit --tag gcr.io/cloud-platforms-as-the-basis/petrov-custom-hello
+
 Развернут сервис `petrov-custom` в регионе `europe-west1` с публичным доступом, порт 8080:
 gcloud run deploy petrov-custom \
   --image gcr.io/cloud-platforms-as-the-basis/petrov-custom-hello \
