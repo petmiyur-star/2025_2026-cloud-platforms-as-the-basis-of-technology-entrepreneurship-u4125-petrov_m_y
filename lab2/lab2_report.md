@@ -28,6 +28,7 @@ if __name__ == '__main__':
     import os
     port = int(os.environ.get('PORT', 8080))
     app.run(host='0.0.0.0', port=port)
+
 Образ собран и загружен в Artifact Registry:
 gcloud builds submit --tag gcr.io/cloud-platforms-as-the-basis/petrov-custom-hello
 
