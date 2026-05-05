@@ -49,22 +49,22 @@ gcloud run deploy petrov-custom \
   --image gcr.io/cloud-platforms-as-the-basis/petrov-custom-hello \
   --platform managed --region europe-west1 --allow-unauthenticated --port 8080
 
-![service_url_lab2](service_url_lab2.png)
+![service_url_lab2](images/service_url_lab2.png)
 
-![hello_world](hello_world.png)
+![hello_world](images/hello_world.png)
 
 ### 2. Анализ логов (Cloud Logging)
 
 Через **Logs Explorer** выполнен запрос по ресурсу `cloud_run_revision` и сервису `petrov-custom`.
 Логи содержат записи о запуске контейнера, обработке HTTP-запросов (метод GET, статус 200).
 
-![logs_lab2](logs_lab2.png)
+![logs_lab2](images/logs_lab2.png)
 
 ### 3. Анализ метрик (Cloud Monitoring)
 
 Через **Metrics Explorer** выбран ресурс `Cloud Run Revision` и метрика `Request count`. Построен график запросов к сервису.
 
-![metricks_lab2](metrics_lab2.png)
+![metricks_lab2](images/metrics_lab2.png)
 
 ### 4. Изменение порта контейнера и создание новой ревизии
 На странице сервиса нажата кнопка **Edit & Deploy new revision**. Порт изменён с `8080` на `8090`.
