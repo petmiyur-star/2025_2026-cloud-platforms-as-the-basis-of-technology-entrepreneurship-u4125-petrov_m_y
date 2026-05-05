@@ -29,7 +29,7 @@ Date of finished: 05.05.2026
 
 ### 2. Создание сервисного аккаунта (Service Account)
 В разделе IAM & Admin → Service Accounts создал аккаунт с именем mpetrov-sa-lab1. При создании назначил роль Storage Admin.  
-![Service account created](images/service_account.png)
+![created](images/created.png)
 
 ### 3. Создание виртуальной машины Compute Engine
 - Имя: mpetrov-vm-lab1
@@ -37,7 +37,7 @@ Date of finished: 05.05.2026
 - Серия: E2, тип e2-micro
 - Режим provisioning: Spot
 - Остальные параметры по умолчанию.  
-![VM created](images/vm_created.png)
+![created_VM](images/created_VM.png)
 
 ### 4. Подключение к VM и подготовка
 Через кнопку SSH подключился к виртуальной машине. Создал локальную папку:
@@ -54,14 +54,14 @@ gcloud auth list
 ### 6. Копирование файлов из бакета lab1-bucket-itmo
 Проверил содержимое бакета:
 gsutil ls gs://lab1-bucket-itmo/
-![Bucket listing](images/bucket_list.png)
+![files](images/files.png)
 
 Выполнил копирование всех файлов в папку ~/lab1_files:
 gsutil cp gs://lab1-bucket-itmo/* ~/lab1_files/
 
 Убедился, что файлы скопировались:
 ls -lah ~/lab1_files/
-![Local files after copy](images/local_files.png)
+![lab1_files](images/lab1_files.png)
 
 ### 7. Изменение роли сервисного аккаунта и повторная попытка копирования
 В консоли IAM & Admin → IAM изменил роль для mpetrov-sa-lab1 с Storage Admin на Compute Viewer. (Скриншот роли в IAM не приложен, но изменение выполнено.)
@@ -77,15 +77,15 @@ gsutil cp gs://lab1-bucket-itmo/* ~/lab1_files/
 Чтобы понять, почему доступ не заблокировался, я проверил публичный доступ к бакету с помощью curl:
 curl -I https://storage.googleapis.com/lab1-bucket-itmo/pic1.jpg
 Результат: HTTP/2 200 (файл доступен всем без аутентификации).  
-![Public bucket check](images/public_bucket_check.png)
+![bucket](images/bucket.png)
 
 Вывод: бакет lab1-bucket-itmo настроен с публичным доступом (allUsers). Поэтому даже после смены роли сервисного аккаунта на Compute Viewer копирование оставалось возможным. В реальном закрытом бакете требовались бы права storage.objects.get и storage.objects.list, которые роль Compute Viewer не даёт.
 
 ### 9. Удаление всех созданных ресурсов
 - Удаление виртуальной машины mpetrov-vm-lab1:  
-  ![Delete VM](images/delete_vm.png)
+  ![delete_VM](images/delete_VM.png)
 - Удаление сервисного аккаунта mpetrov-sa-lab1:  
-  ![Delete SA](images/delete_sa.png)
+  ![delete_SA](images/delete_SA.png)
 
 ## Выводы
 В ходе лабораторной работы я:
