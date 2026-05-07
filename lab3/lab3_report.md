@@ -36,14 +36,14 @@ Date of finished: 08.05.2026
 ### 3. Создание папки и перемещение файлов
 Внутри бакета создана папка `images`. Все загруженные изображения перемещены в эту папку.
 
-[СКРИНШОТ 3: папка `images` с файлами внутри]
+![images](images/images.png)
 
 ### 4. Настройка публичного доступа
 При попытке добавить принципал `allUsers` с ролью `Storage Object Viewer` возникла ошибка:
 `Principals allUsers and allAuthenticatedUsers cannot be added since public access prevention is enforced on this bucket.`
 Это означает, что в проекте административно включена защита от публичного доступа (Public Access Prevention). Изменить эту политику у меня нет прав.
 
-[СКРИНШОТ 4: сообщение об ошибке при добавлении allUsers]
+![oshibka](images/oshibka.png)
 
 ### 5. Альтернативный метод: подписанные URL (signed URLs)
 
@@ -53,22 +53,13 @@ Date of finished: 08.05.2026
 
 Команда успешно выполнилась и выдала ссылку.
 
-[СКРИНШОТ 5: вывод команды `gsutil signurl` с полученной ссылкой]
+![URL](images/URL.png)
 
 Скопированная ссылка была открыта в режиме инкогнито браузера. Изображение отобразилось, что подтверждает корректную работу механизма signed URL.
-
-[СКРИНШОТ 6: браузер в режиме инкогнито с открытым изображением]
 
 ### 6. Удаление ресурсов
 
 После выполнения работы все созданные ресурсы были удалены:
-
-    gcloud storage rm -r gs://mpetrov-lab3-bucket/*
-    gcloud storage buckets delete gs://mpetrov-lab3-bucket
-    gcloud iam service-accounts delete signer-sa@cloud-platforms-as-the-basis.iam.gserviceaccount.com --quiet
-    rm /home/petmiyur/signer-key.json
-
-[СКРИНШОТ 7: подтверждение удаления бакета или пустой список бакетов]
 
 ## Выводы
 
